@@ -1,4 +1,4 @@
-<!--
+z <!--
 Posible prompt:
 <prompt>
 Tengo un cuestionario con preguntas sobre "Clases y Objetos". Debes tener en cuenta que los conocimientos previos que tengo (y por tanto tus respuestas deben ser adaptadas), son:
@@ -23,6 +23,20 @@ A abstracción refírese a representar conceptos complexos de forma simplificada
 A herdanza permite crear novas clases a partir doutras xa existentes, reutilizando código e ampliando funcionalidades. Mediante esta técnica, unha clase derivada herda os campos e métodos da clase base, podendo engadir novos comportamentos ou redefinir algúns dos existentes. Isto resulta útil para modelar relacións do tipo “é un”, como que un Coche é un tipo de Vehiculo.
 Por último, o polimorfismo permite que un mesmo método ou referencia se comporte de maneira diferente segundo o tipo concreto do obxecto co que se traballa. En Java isto maniféstase principalmente a través da redefinición de métodos (override) e do uso de referencias de clase base que apuntan a obxectos de clases derivadas. O resultado é unha maior flexibilidade, xa que diferentes obxectos poden responder á mesma operación de forma adaptada ás súas características.
 
+__________CLASE:
+Abstraccion: centradas na abstraccion vamos ter as demais características encapsulación, herzanda e polimorfismo.
+ABSTRACCIÓN:olvidarse de los detalles para: a-> M anejar mejor temas complejos
+                                            b->Facilitar la modificación (MANTENIMIENTO)
+
+ENCAPSULACIÓN:a-> Unir info y funciones sobre esa info en un mismo criterio
+              b-> Encapsular y ocultar partes al exterior
+
+HERENCIA: Crea jereaquias Animal (duerme)         No es la mejor foma de reutilizar.
+              (ladrar)perro   gato(maullar)
+
+POLIMORFISMO: Misma funcion distintas implementaciones en funcion del tipo
+                ej si es dormir, duerme distinto un gato q un perro
+
 
 ## 2. Cita cuatro lenguajes populares que permitan la programación orientada a objetos
 
@@ -30,6 +44,14 @@ Por último, o polimorfismo permite que un mesmo método ou referencia se compor
 Algúns dos linguaxes máis populares que permiten a programación orientada a obxectos son Java, C++, Python e C#. Todos eles permiten crear clases, obxectos e aplicar conceptos básicos como herdanza ou polimorfismo, aínda que cada un o fai co seu propio estilo e nivel de rigor.
 Estes catro linguaxes son amplamente utilizados na industria e no ensino, polo que adoitan considerarse exemplos representativos cando se fala de POO. A súa popularidade débese tanto á súa versatilidade como á facilidade para aplicar neles os principios fundamentais deste paradigma.
 
+
+
+__________CLASE:
+pythin, javaScript, PMP
+Java, c# tienen GC(recolestor de basura), segiros en memoria |Compilados, un procesos que el programador es conscioente y detecta errores que  ala vex ¡¡z que traduce
+C++ sin GC                                                   | en cd una de las versiones del niverl ejecutable
+
+                                                                Su comprobación es estética de tipos   =>Facilita el desarrollo de PROG GRANDES
 
 ## 3. Los paradigmas anteriores a la POO, ¿Qué es la **programación estructurada**? y, todavía mejor, ¿Qué es la **programación modular**?
 
@@ -39,12 +61,24 @@ A programación modular pode considerarse unha evolución natural da estruturada
 En resumo, a programación estruturada proporciona unha forma ordeada de controlar o fluxo dun programa, mentres que a programación modular engade un nivel superior de organización, agrupando funcionalidades en unidades ben definidas. Ambos paradigmas serviron como base conceptual antes da chegada da programación orientada a obxectos, que introduce novas formas de organizar tanto os datos como os comportamentos.
 
 
+__________CLASE:
+ENSAMBLADOR (secuencia de instrucciones y saltos arbitrarios)
+     |
+ESTRUCTURADA  a-> secuencia,bifurcacion (if switch), interacción (While, for)
+              b->Quita el salto arbitrario
+     |
+MODULAR: añade nuevos conceptos, libreria paquete ->para ENCAPSULAR Y REUTILIZAR
+
+
 ## 4. ¿Qué tres elementos definen a un objeto en programación orientada a objetos?
 
 ### Respuesta:
 Un obxecto en programación orientada a obxectos defínese a partir de tres elementos fundamentais: estado, comportamento e identidade. O estado representa a información que o obxecto almacena, é dicir, os valores das súas variables internas. Cada obxecto conserva o seu propio estado, polo que dous obxectos da mesma clase poden ter valores distintos nos seus atributos.
 O comportamento refírese ás accións que o obxecto pode realizar, e exprésase a través dos seus métodos. Estes métodos permiten modificar o estado interno, interactuar con outros obxectos ou realizar cálculos, definindo así como responde o obxecto ante determinadas operacións. Grazas ao comportamento, un obxecto non é só un conxunto de datos, senón unha entidade activa.
 Por último, a identidade distingue un obxecto doutro, incluso se teñen o mesmo estado e comportamento. En Java, esta identidade está asociada ao espazo de memoria que ocupa o obxecto cando é creado con new. Esta característica garante que dúas instancias aparentemente iguais sigan sendo obxectos diferentes con existencia propia dentro do programa.
+
+
+__________CLASE:
 
 ## 5. ¿Qué es una clase? ¿Es lo mismo que un objeto? ¿Qué es una instancia? ¿Todos los lenguajes orientados a objetos manejan el concepto de clase?
 
