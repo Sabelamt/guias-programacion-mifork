@@ -79,6 +79,9 @@ Por último, a identidade distingue un obxecto doutro, incluso se teñen o mesmo
 
 
 __________CLASE:
+IDENTIDAD: Td objeto tienen identidad única (persarlo cm su dirección de memoria)
+ESTADO(Atributos):((campos)) valor de sus atributos
+COMPORTAMIENTO(Métodos): Funciones que puede hacer
 
 ## 5. ¿Qué es una clase? ¿Es lo mismo que un objeto? ¿Qué es una instancia? ¿Todos los lenguajes orientados a objetos manejan el concepto de clase?
 
@@ -86,6 +89,11 @@ __________CLASE:
 Unha clase é unha estrutura que describe un tipo de obxecto, definindo que datos terá (atributos) e que operacións poderá realizar (métodos). Pode entenderse como un molde ou plantilla a partir da cal se crean obxectos reais. Por tanto, unha clase non é un obxecto, senón a definición teórica que permite xerar obxectos cun estado e comportamento concretos.
 Un obxecto, pola contra, é unha entidade concreta creada a partir dunha clase. Cada obxecto ten o seu propio estado, distinto do doutros obxectos aínda que procedan da mesma clase. A creación dun obxecto denomínase instanciación, e o resultado desa operación recibe o nome de instancia. Así, unha instancia é simplemente un obxecto específico que existe na memoria e que foi construído seguindo o deseño establecido pola clase correspondente.
 Non todos os linguaxes orientados a obxectos usan o concepto de clase da mesma maneira, nin sequera todos o empregan. Linguaxes como Java, C++, C# ou Python permiten definir clases explícitas, pero existen outros como JavaScript que tradicionalmente se basearon en prototipos, permitindo orientación a obxectos sen necesidade de clases formais (aínda que posteriormente incorporaron sintaxe de clases por comodidade). Isto mostra que a orientación a obxectos é un paradigma amplo, no que o uso de clases é frecuente pero non obrigatorio.
+
+
+__________CLASE:
+CLASE: Molde q define el estado y el comportamiento
+OBJETOS O INSTANCIAS: realizaciones concretass en eejcución de una clase  ej mazda 2009, mzda 2020
 
 
 ## 6. ¿Dónde se almacenan en memoria los objetos? ¿Es igual en todos los lenguajes? ¿Qué es la **recolección de basura**? 
