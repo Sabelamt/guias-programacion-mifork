@@ -306,7 +306,7 @@ __________CLASE:____
     -Una referencia al obj actual
     -Util para desambiguar, y para aclarar
     -NO disponible en métodos static
-    
+
 
 
 ## 13. Añade ahora otro nuevo método que se llame `distanciaA`, que reciba un `Punto` como parámetro y calcule la distancia entre `this` y el punto proporcionado
@@ -355,9 +355,9 @@ public class Main {
 ## 14. El paso del `Punto` como parámetro a un método, es **por copia** o **por referencia**, es decir, si se cambia el valor de algún atributo del punto pasado como parámetro, dichos cambios afectan al objeto fuera del método? ¿Qué ocurre si en vez de un `Punto`, se recibiese un entero (`int`) y dicho entero se modificase dentro de la función? 
 
 ### Respuesta:
-En Java, todo se pasa por valor. Cuando se pasa un objeto (como Punto) a un método, lo que se copia es el valor de la referencia. Por ello, si dentro del método se modifican atributos del objeto referenciado (por ejemplo, p.x = 10;), esos cambios sí afectan al objeto fuera del método, porque tanto el parámetro como la variable del llamador apuntan al mismo objeto en el heap. Sin embargo, si dentro del método se reasigna el parámetro (p = new Punto()), esa nueva referencia no se propaga al exterior, ya que solo cambia la copia local de la referencia.
+En Java, todo se pasa por valor(copia). Cuando se pasa un objeto (como Punto) a un método, lo que se copia es el valor de la referencia. Por ello, si dentro del método se modifican atributos del objeto referenciado (por ejemplo, p.x = 10;), esos cambios sí afectan al objeto fuera del método, porque tanto el parámetro como la variable del llamador apuntan al mismo objeto en el heap. Sin embargo, si dentro del método se reasigna el parámetro (p = new Punto()), esa nueva referencia no se propaga al exterior, ya que solo cambia la copia local de la referencia.
 En cambio, para tipos primitivos como int, también se pasa por valor, pero aquí el valor es el contenido numérico. Si se recibe un int y se le cambia el valor dentro del método (por ejemplo, n = 99;), no afecta a la variable original del llamador, porque lo que se modificó fue únicamente la copia local del entero. Este comportamiento diferencia claramente “modificar el estado del objeto apuntado” (que sí impacta fuera) de “cambiar qué referencia o valor primitivo tiene el parámetro” (que no impacta fuera).
-
+ ```java
 // Ejemplo con objeto: modificar atributos SÍ afecta fuera
 void mueveXPunto(Punto p) { p.x += 10; }    // cambia el estado del mismo objeto
 void reasignaPunto(Punto p) { p = new Punto(0,0); } // NO cambia la referencia externa
@@ -365,6 +365,40 @@ void reasignaPunto(Punto p) { p = new Punto(0,0); } // NO cambia la referencia e
 // Ejemplo con primitivo: NO afecta fuera
 void incrementa(int n) { n++; } // 'n' es una copia, el original no cambia
 
+ ```
+
+__________CLASE:____
+IMPORTANTE.
+Los obj se pasan copias de la referencia
+Paso:
+-Primitivos(int double) se pasan por COPIA
+-Obj de pasasn por COPIA DE UNA REFERENCIA
+"idea de implementación"->Como si hubiese un tipo primitivo más :"ref"
+
+ ```java
+ public class Main(){
+    public static void(String[] args){
+        Punto punto1=new Punto(3,4);
+        Punto punto2=new Punto(6,5);
+
+        double distanciaEntrePuntos - punto1.distanciaA(punto2);
+    }
+ }
+
+ double distanciaA(Punto otro){
+    double dx= this.x -otro.x;
+     double dy= this.y -otro.y;
+
+     double distancia =Math.sqtr(dx*dx +dy*dy);
+
+
+    //paramos ak
+    return distancia;
+ }
+ public String toString(){
+return (this.x "+" this.y)
+ }
+ ```
 
 ## 15. ¿Qué es el método `toString()` en Java? ¿Existe en otros lenguajes? Pon un ejemplo de `toString()` en la clase `Punto` en Java
 
