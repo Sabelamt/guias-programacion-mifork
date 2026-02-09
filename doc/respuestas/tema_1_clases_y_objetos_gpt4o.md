@@ -23,7 +23,7 @@ A abstracción refírese a representar conceptos complexos de forma simplificada
 A herdanza permite crear novas clases a partir doutras xa existentes, reutilizando código e ampliando funcionalidades. Mediante esta técnica, unha clase derivada herda os campos e métodos da clase base, podendo engadir novos comportamentos ou redefinir algúns dos existentes. Isto resulta útil para modelar relacións do tipo “é un”, como que un Coche é un tipo de Vehiculo.
 Por último, o polimorfismo permite que un mesmo método ou referencia se comporte de maneira diferente segundo o tipo concreto do obxecto co que se traballa. En Java isto maniféstase principalmente a través da redefinición de métodos (override) e do uso de referencias de clase base que apuntan a obxectos de clases derivadas. O resultado é unha maior flexibilidade, xa que diferentes obxectos poden responder á mesma operación de forma adaptada ás súas características.
 
-__________CLASE:
+__________CLASE:____
 Abstraccion: centradas na abstraccion vamos ter as demais características encapsulación, herzanda e polimorfismo.
 ABSTRACCIÓN:olvidarse de los detalles para: a-> M anejar mejor temas complejos
                                             b->Facilitar la modificación (MANTENIMIENTO)
@@ -46,7 +46,7 @@ Estes catro linguaxes son amplamente utilizados na industria e no ensino, polo q
 
 
 
-__________CLASE:
+__________CLASE:____
 pythin, javaScript, PMP
 Java, c# tienen GC(recolestor de basura), segiros en memoria |Compilados, un procesos que el programador es conscioente y detecta errores que  ala vex ¡¡z que traduce
 C++ sin GC                                                   | en cd una de las versiones del niverl ejecutable
@@ -61,7 +61,7 @@ A programación modular pode considerarse unha evolución natural da estruturada
 En resumo, a programación estruturada proporciona unha forma ordeada de controlar o fluxo dun programa, mentres que a programación modular engade un nivel superior de organización, agrupando funcionalidades en unidades ben definidas. Ambos paradigmas serviron como base conceptual antes da chegada da programación orientada a obxectos, que introduce novas formas de organizar tanto os datos como os comportamentos.
 
 
-__________CLASE:
+__________CLASE:____
 ENSAMBLADOR (secuencia de instrucciones y saltos arbitrarios)
      |
 ESTRUCTURADA  a-> secuencia,bifurcacion (if switch), interacción (While, for)
@@ -78,7 +78,8 @@ O comportamento refírese ás accións que o obxecto pode realizar, e exprésase
 Por último, a identidade distingue un obxecto doutro, incluso se teñen o mesmo estado e comportamento. En Java, esta identidade está asociada ao espazo de memoria que ocupa o obxecto cando é creado con new. Esta característica garante que dúas instancias aparentemente iguais sigan sendo obxectos diferentes con existencia propia dentro do programa.
 
 
-__________CLASE:
+__________CLASE:____
+
 IDENTIDAD: Td objeto tienen identidad única (persarlo cm su dirección de memoria)
 ESTADO(Atributos):((campos)) valor de sus atributos
 COMPORTAMIENTO(Métodos): Funciones que puede hacer
@@ -91,9 +92,9 @@ Un obxecto, pola contra, é unha entidade concreta creada a partir dunha clase. 
 Non todos os linguaxes orientados a obxectos usan o concepto de clase da mesma maneira, nin sequera todos o empregan. Linguaxes como Java, C++, C# ou Python permiten definir clases explícitas, pero existen outros como JavaScript que tradicionalmente se basearon en prototipos, permitindo orientación a obxectos sen necesidade de clases formais (aínda que posteriormente incorporaron sintaxe de clases por comodidade). Isto mostra que a orientación a obxectos é un paradigma amplo, no que o uso de clases é frecuente pero non obrigatorio.
 
 
-__________CLASE:
+__________CLASE:____
 CLASE: Molde q define el estado y el comportamiento
-OBJETOS O INSTANCIAS: realizaciones concretass en eejcución de una clase  ej mazda 2009, mzda 2020
+OBJETOS O INSTANCIAS: realizaciones concretas en ejcución de una clase.  ej mazda 2009, mazda 2020
 
 
 ## 6. ¿Dónde se almacenan en memoria los objetos? ¿Es igual en todos los lenguajes? ¿Qué es la **recolección de basura**? 
@@ -102,6 +103,18 @@ OBJETOS O INSTANCIAS: realizaciones concretass en eejcución de una clase  ej ma
 En Java, os obxectos almacénanse na memoria dinámica, é dicir, no montón (heap). Cada vez que se utiliza new, resérvase espazo no heap para gardar o estado dese obxecto. Mentres tanto, as variables que apuntan a eses obxectos adoitan situarse na pila (stack), pero só gardan a referencia, non o contido do obxecto. Este modelo permite que diferentes partes do programa compartan un mesmo obxecto simplemente copiando a referencia.
 A forma de almacenar obxectos non é igual en todos os linguaxes. En C++, por exemplo, un obxecto pode estar na pila, no heap ou incluso ser global, dependendo de como se declare, o que concede moita flexibilidade pero tamén máis responsabilidade ao programador. En cambio, linguaxes como Java ou C# optan por un modelo máis estrito no que os obxectos sempre viven no heap, simplificando a xestión da memoria e evitando erros como accesos a memoria liberada.
 A recolección de basura (garbage collection) é un mecanismo automático que elimina da memoria os obxectos que xa non están en uso, é dicir, aqueles aos que non queda ningunha referencia activa. Isto evita que o programador teña que liberar manualmente a memoria, como ocorre en C ou C++. Grazas a este sistema, redúcese o risco de fugas de memoria e de referencias colgantes, permitindo centrarse na lóxica do programa máis que na súa xestión de recursos.
+
+
+__________CLASE:____
+OBJETOS almacena heap en la mayoría de lenguajes (java 100%), pero no es asi en todos los lenguajes tmb se pueden almacenar en el stack ej c++
+        Ventajas de usar heap: 
+         a->La memoria es dinámica, se decide lo que se ocupa en tiempo de ejecución
+        b->La vida de los objetos del heap no depend de la vida de la función que los crea
+        Problema del heap: 
+        a->Hay que encargarse de liberar memoria no usada del heap  
+        |1.MANUAL-> dificil y propenso a bugs("memory leak")
+        |2. RECOLECTOR DE BASURA ->ELimina objetos no accesibles directa o indirectamente desde el stack      
+            "deventaja" es el rendimiento o poca eficiencia siempre se ejecuta auvnq no tenga nd q liberar
 
 
 ## 7. ¿Qué es un método? ¿Qué es la **sobrecarga de métodos**? 
@@ -149,19 +162,61 @@ O punto de entrada dun programa en Java é sempre o método main coa forma exact
 O modificador static indica que un membro (método ou atributo) pertence á clase e non aos obxectos individuais. Isto significa que pode empregarse sen crear instancias e que é compartido por todas elas. Non se utiliza só para o método main; tamén se emprega en variables compartidas, métodos auxiliares ou constantes que non dependen do estado dos obxectos. O uso de static, por tanto, permite definir elementos comúns que existen de maneira global dentro da clase.
 A combinación static final adoita utilizarse para declarar constantes, é dicir, valores que pertencen á clase e que non poden modificarse unha vez definidos. O modificador final impide que a variable cambie, garantindo que manteña sempre o mesmo valor durante a execución. A unión de ambos facilita definir elementos como static final double PI = 3.14159;, creando constantes accesibles sen necesidade de instancias e cun valor garantido como inmutable.
 
+
+__________CLASE:____
+```java
+class Encargado1{
+    public static void main(String [] args){ç}
+}
+```
+STATIC: Permite usar un método o atributo sin necesidad de instancia de la clase-> Se antepone el nombre de la clase (no de una instancia)
+ej: main; Integer.parseInt() ; Math.sqtr()
+-En estos metodos nunca existe this
+-En atributos, solo se guarda en un único lugar de memoria
+
+CONSTANTES
+```java
+class Punto{
+ double static final PI=3.14;
+ //Final no se puede asignar en el futuro
+}
+```
+
 ## 10. Intenta ejecutar un poco de Java de forma básica, con los comandos `javac` y `java`. ¿Cómo podemos compilar el programa y ejecutarlo desde linea de comandos? ¿Java es compilado? ¿Qué es la **máquina virtual**? ¿Qué es el *byte-code* y los ficheros `.class`?
 
 ### Respuesta:
 Para compilar un programa Java desde a liña de comandos emprégase o compilador javac. Primeiro cómpilase o ficheiro .java e, se non hai erros, xeranse un ou varios ficheiros .class. Estes conteñen o bytecode, que é unha representación intermedia do programa. Unha vez xerados, o programa execútase coa orde java, indicando o nome da clase que contén o método main. Por exemplo:
 
-
+```java
 javac Main.java
 java Main
+```
 
 Java considérase un linguaxe compilado e interpretado ao mesmo tempo. Primeiro compílase a bytecode, que non depende do sistema operativo nin da arquitectura. A continuación, ese bytecode interprétase ou se optimiza xusto a tempo (JIT) na plataforma onde se execute. Este modelo híbrido fai que o mesmo programa poida executarse en Windows, Linux, macOS ou outros sistemas sen recompilar.
 A Máquina Virtual de Java (JVM) é o sistema encargado de executar o bytecode xerado pola compilación. Actúa como unha capa intermedia entre o programa e o sistema operativo, ofrecendo seguridade, portabilidade e xestión automática da memoria. Grazas á JVM, o mesmo bytecode pode funcionar en calquera dispositivo que dispoña dunha implementación compatible, cumprindo o principio write once, run anywhere.
 O bytecode é unha forma de código compacto e independente da plataforma que se almacena nos ficheiros .class. Estes ficheiros conteñen as instrucións que a JVM sabe interpretar. Non é código máquina real, pero tampouco é código fonte; é un formato intermedio optimizado para permitir execución segura e eficiente en diferentes plataformas. Esta separación entre compilación e execución é unha das claves da portabilidade de Java.
 
+
+
+
+__________CLASE:____
+
+primero tenemos .java (texto)-->         TIEMPO DE COMPUTACIÓN
+javac(compilador)  --->
+.pass (ficheiro binario "byte code)  que se pasa a----> 
+java (intérprete) y en la ejecición tenemos---->
+ stack heap(JVM)    TIEMPO DE EJECUCIÓN
+
+ ```java
+public class Main{
+    public static void main(String[] args){
+        Punto miPunto=new Punto();
+        miPunto.x=10;
+        miPunto.y=20;
+        System.out.printl( "Punto" + miPunto.x)
+    }
+}
+```
 
 ## 11. En el código anterior de la clase `Punto` ¿Qué es `new`? ¿Qué es un **constructor**? Pon un ejemplo de constructor en una clase `Empleado` que tenga DNI, nombre y apellidos
 
@@ -169,12 +224,12 @@ O bytecode é unha forma de código compacto e independente da plataforma que se
 En Java, new es el operador que reserva memoria en el heap y crea un objeto de una clase, devolviendo una referencia a esa nueva instancia. Al usar new, se invoca automáticamente un constructor, que es un método especial con el mismo nombre que la clase y sin tipo de retorno, cuya función es inicializar el estado del objeto (asignar valores iniciales a sus atributos y, si procede, realizar comprobaciones básicas).
 Un constructor puede estar sobrecargado (varias versiones con distintos parámetros) y puede incluir lógica de validación; si no se define ninguno, Java proporciona un constructor por defecto (sin parámetros). En el ejemplo de Punto anterior, new Punto() crea la instancia y llama al constructor por defecto de Punto. A continuación, se muestra un ejemplo de clase Empleado con atributos dni, nombre y apellidos, y un constructor que los inicializa.
 
-
+ ```java
 public class Empleado {
     // Atributos (visibilidad de ejemplo; puede ajustarse según necesidad)
-    private String dni;
-    private String nombre;
-    private String apellidos;
+     String dni;
+     String nombre;
+     String apellidos;
 
     // Constructor que inicializa todos los campos
     public Empleado(String dni, String nombre, String apellidos) {
@@ -189,13 +244,34 @@ public class Empleado {
     public String getApellidos() { return apellidos; }
 }
 
+```
+
+__________CLASE:____
+que hace el NEW
+1.Reservar memoria para un nuevo obj
+2.Ejecuta un constructor con ese objeto como obj actual("this")
+3.Devuelve es nuevo obj (new es una expresión)
+
+ ```java
+class Punto{
+    int x;
+    int y;
+
+    Punto(int x, int y){
+        this.x=x;
+        this.y=y;
+    }
+
+}
+
+```
 
 ## 12. ¿Qué es la referencia `this`? ¿Se llama igual en todos los lenguajes? Pon un ejemplo del uso de `this` en la clase `Punto`
 
 ### Respuesta:
 En Java, this es una referencia al objeto actual dentro del contexto de una instancia. Se utiliza para desambiguar entre atributos y parámetros con el mismo nombre, para encadenar constructores (this(...)) y para pasar la referencia del propio objeto a otros métodos. Su finalidad es dejar claro que se está accediendo a los campos o métodos de instancia del objeto sobre el que se está trabajando en ese momento.
 No todos los lenguajes lo llaman igual, aunque el concepto es muy similar. Por ejemplo, en C++ y JavaScript se emplea también this, mientras que en Python se usa el parámetro explícito self en los métodos de instancia. La idea general es la misma: disponer de una referencia al objeto receptor del método para acceder a su estado y comportamiento.
-
+ ```java
 // Clase Punto con uso ilustrativo de 'this'
 class Punto {
     int x;  // visibilidad por defecto
@@ -224,6 +300,13 @@ class Punto {
         return Math.sqrt((double)(dx * dx + dy * dy));
     }
 }
+ ```
+__________CLASE:____
+    THIS
+    -Una referencia al obj actual
+    -Util para desambiguar, y para aclarar
+    -NO disponible en métodos static
+    
 
 
 ## 13. Añade ahora otro nuevo método que se llame `distanciaA`, que reciba un `Punto` como parámetro y calcule la distancia entre `this` y el punto proporcionado
@@ -231,7 +314,7 @@ class Punto {
 ### Respuesta:
 Para calcular la distancia entre el objeto actual (this) y otro punto, se define un método distanciaA(Punto otro) que reciba un parámetro de tipo Punto. La implementación aplica la fórmula de la distancia euclídea entre dos puntos en el plano: sqrt((x1 - x2)^2 + (y1 - y2)^2). Se mantiene la visibilidad por defecto en los atributos x e y para ser coherente con los ejercicios previos; el método accede a this.x y this.y para referirse a las coordenadas del objeto receptor.
 También puede añadirse un método auxiliar que calcule la distancia al origen o una sobrecarga que reciba coordenadas int, pero para el requisito actual basta con aceptar un Punto como argumento. En el ejemplo de uso, se crean dos instancias y se invoca p1.distanciaA(p2), imprimiendo el resultado en consola. El código completo es ejecutable en un único archivo con una clase Main que contiene el método main.
-
+ ```java
 // Clase Punto con visibilidad por defecto en los atributos
 class Punto {
     int x;  // visibilidad por defecto (package-private)
@@ -267,7 +350,7 @@ public class Main {
         System.out.println("Distancia entre p1 y p2: " + d);
     }
 }
-
+ ```
 
 ## 14. El paso del `Punto` como parámetro a un método, es **por copia** o **por referencia**, es decir, si se cambia el valor de algún atributo del punto pasado como parámetro, dichos cambios afectan al objeto fuera del método? ¿Qué ocurre si en vez de un `Punto`, se recibiese un entero (`int`) y dicho entero se modificase dentro de la función? 
 
