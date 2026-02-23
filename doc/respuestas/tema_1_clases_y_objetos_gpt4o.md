@@ -25,11 +25,13 @@ Por último, o polimorfismo permite que un mesmo método ou referencia se compor
 
 __________CLASE:____
 Abstraccion: centradas na abstraccion vamos ter as demais características encapsulación, herzanda e polimorfismo.
-ABSTRACCIÓN:olvidarse de los detalles para: a-> M anejar mejor temas complejos
-                                            b->Facilitar la modificación (MANTENIMIENTO)
+ABSTRACCIÓN:olvidarse de los detalles para: 
+a-> M anejar mejor temas complejos
+b->Facilitar la modificación (MANTENIMIENTO)
 
-ENCAPSULACIÓN:a-> Unir info y funciones sobre esa info en un mismo criterio
-              b-> Encapsular y ocultar partes al exterior
+ENCAPSULACIÓN:
+a-> Unir info y funciones sobre esa info en un mismo criterio
+b-> Encapsular y ocultar partes al exterior
 
 HERENCIA: Crea jereaquias Animal (duerme)         No es la mejor foma de reutilizar.
               (ladrar)perro   gato(maullar)
@@ -81,7 +83,7 @@ Por último, a identidade distingue un obxecto doutro, incluso se teñen o mesmo
 __________CLASE:____
 
 IDENTIDAD: Td objeto tienen identidad única (persarlo cm su dirección de memoria)
-ESTADO(Atributos):((campos)) valor de sus atributos
+ESTADO(Atributos):(campos) valor de sus atributos
 COMPORTAMIENTO(Métodos): Funciones que puede hacer
 
 ## 5. ¿Qué es una clase? ¿Es lo mismo que un objeto? ¿Qué es una instancia? ¿Todos los lenguajes orientados a objetos manejan el concepto de clase?
