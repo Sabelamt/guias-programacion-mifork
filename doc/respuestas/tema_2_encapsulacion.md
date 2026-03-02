@@ -22,9 +22,12 @@ Este enfoque permite que el estado interno de un objeto no pueda alterarse de fo
 También se gana seguridad, ya que solo se exponen las operaciones necesarias y se evita que partes del programa manipulen datos sensibles sin control. Por último, favorece la reutilización de código: al tener clases bien encapsuladas, cada una cumple una función clara y puede utilizarse en otros proyectos sin necesidad de conocer su lógica interna.
 
 **-------CLASE:**
-Encapsulación, tiene que ver con "protección":
-1-Evito estados no válidos de mis obj
-2-Evito dependencias desde fuera que no requiero
+
+Encapsulación tiene que ver con protección
+1-Evito estados no válidos de mis obj;
+2-Evito dependencias desde fuera que no 
+
+    
 
 (Encapsulación: He juntado estado y comport en un artefacto(la clase), y ahora puedo ocultar ciertas partes al exterior)
 
@@ -459,6 +462,21 @@ x ej un setter . un método modificador es un setter pero no tienen tds pq serlo
 
 si que tienen, las clases inmutables tienen ventajas->No hacer clases mutables x defecto; como primera opción
 
+
+INMUTABLE-->El estado del obj no cambia desde que se crea el obj
+MÉTODO MODIF--> método que cambbia el estado interno delobj(ej.setter, ingresar(), retirar saldo())
+```mermaid
+graph TD;
+A[Ventajas]-->B[Más fáciles de entender]
+A[Ventajas]-->C[ -Mejor en concurrencia]
+B[Más fáciles de entender]-->D[menos errores]
+```
+
+
+
+
+
+
 ## 18. ¿Es recomendable incluir métodos "setter" siempre y como convención?
 
 ### Respuesta
@@ -483,6 +501,36 @@ Si una operación requiere construir progresivamente una cadena muy larga o real
 **-------CLASE:**
 String es inmutable
 
+```java
+class Libro{
+    private final String titulo;
+    public Libro (String titulo);
+    this,titulo=titulo;
+
+
+public String getTitulo(){
+    return this.titulo;
+    }
+}
+
+main()
+Libro libro =new Libro ("Quijote");
+String titulo=libro.getTitulo();
+
+A-Titulo "La Regenta"
+B-libro , setCharAt(0,R)----<>Este método no existe
+
+```
+
+StringBuilder--ej. de clase mutable para concatenar strings x ej
+```java
+StringBUilder sb=new StringBuilder();
+sb.append("hola");
+sb.append("adios");
+String resutado=sb.toString();
+```
+
+
 ## 20. En POO ¿Cómo se comparan objetos de una misma clase? ¿Por su contenido o por su identidad? ¿Qué es el método equals en Java? ¿Qué hace por defecto? ¿Cómo se deben comparar dos cadenas en Java? 
 
 ### Respuesta
@@ -501,6 +549,24 @@ Este método ya está sobrescrito adecuadamente en `String`, de modo que compara
 Esta distinción entre identidad y contenido es fundamental en POO, ya que permite elegir entre comparar objetos como “valores” (igualdad lógica) o como “entidades únicas” (igualdad por identidad). La correcta implementación de `equals` y el uso de `==` solo para identidad evita errores comunes y garantiza que el comportamiento sea coherente con la intención del diseño.
 
 
+**-------CLASE:**
+IGUALDAD A NVL DE OBJ
+"si el libro l1 ¿es igual? el libro l2"
+ ->por identidad: misma direccion de memoria--------En java : if(l1==l2)
+ ->por contenido: mismo estado--------En java : Se usaría "equals", siempre y cuando este implementado para comparar por contenido. if(l1.equals(l2))
+```mermaid
+graph TD;
+a[Equals]-->B[Esta en todas las clases];
+a[Equals]-->c[por defecto, hace comparación por identidad]
+a[Equals]-->d[En las clases que asi lo implementan , hace comparacion por contenido, ej String]
+d[En las clases que asi lo implementan , hace comparacion por contenido, ej String]-->f[Normalmente querras compara tus string con equals]
+```
+
+
+```java
+ Libro l1= new Libro("Quijote");
+ Libro l2= new Libro("Quijote");
+```
 ## 21. ¿Qué son las clases "wrapper" en un lenguaje de programación orientado a objetos? ¿Cómo se hace? ¿Es un proceso automático? ¿Qué ventajas tienen? ¿Todos los lenguajes orientados a objetos tienen tipos primitivos y necesitan wrappers? 
 
 ### Respuesta
@@ -513,6 +579,22 @@ Las clases wrapper tienen varias ventajas: permiten almacenar tipos primitivos e
 No todos los lenguajes orientados a objetos tienen tipos primitivos ni necesitan wrappers. Lenguajes como **Python** o **Ruby** no distinguen entre tipos primitivos y objetos: todo es un objeto desde el inicio. En ellos, no se requiere un mecanismo de envoltorio porque números, cadenas y booleanos ya son instancias de clases. En cambio, lenguajes como **Java** o **C#** sí diferencian entre valores primitivos y objetos por razones de eficiencia, por lo que necesitan wrappers para proporcionar comportamiento orientado a objetos de forma unificada.
 
 
+**-------CLASE:**
+Wrapper
+-Se suelen usar en lenguajes 00 que tienen tipos primitivos
+-Clases para encontrar valores primitivos y darle lass ventajas de la 00
+int<=>Integer
+float<=>Float
+char<=>Character
+bool<=>Boolean
+
+```mermaid
+graph TD;
+a[ventajas]-->b[tiene métodos útiles];
+b[tiene métodos útiles]-->c[Integer parseInt String ];
+a[ventajas]-->i[Pueden ser valores en contextos donde se return objetos ej listaInteger]
+```
+
 ## 22. ¿En POO qué es un **tipo de dato enumerado**? ¿En Java, un tipo de dato enumerado es una clase? ¿Qué ventajas tienen en términos de encapsulación los enumerados en Java?
 
 ### Respuesta
@@ -521,6 +603,41 @@ Un **tipo de dato enumerado** en POO es un tipo cuyos valores posibles están **
 En Java, un tipo enumerado (`enum`) es realmente una **clase especial**, aunque más restringida y diseñada específicamente para representar conjuntos finitos de valores. Cada elemento del `enum` es una instancia única y final de esa clase. Esto implica que los enumerados pueden tener métodos, atributos, constructores privados e incluso implementar interfaces. Por tanto, no son simples constantes, sino objetos con comportamiento si se necesita, aunque su aspecto básico siga siendo el de un conjunto cerrado de valores bien definidos.
 
 Los enumerados en Java aportan ventajas importantes en términos de **encapsulación**. Al ser clases, pueden ocultar detalles internos, controlar su propio estado y exponer únicamente la interfaz necesaria. También impiden que se creen nuevos valores fuera de los definidos en el `enum`, lo que protege la integridad del dominio del problema y fortalece las invariantes. Además, pueden agrupar dentro de sí mismos toda la lógica relacionada, evitando que la responsabilidad quede dispersa por el código y permitiendo un diseño más limpio, coherente y seguro.
+
+**-------CLASE:**
+```mermaid
+graph TD;
+a[enumerados]-->b[Es un tipo cuyos valores son sinitos y conocidos de antemano];
+a[enumerados]-->c[En java un enumerado en una clase pero:];
+c[En java un enumerado en una clase pero:]-->d[las instancias que tiene: son fnitas y conocidas de antemano]
+c[En java un enumerado en una clase pero:]-->e[pero tmb es una clase]
+
+```
+
+```java
+public enum TipoIVA{
+    GENERAL,
+    REDUCIDO;
+    /*private double factor;
+    private TipoIVA(double factor){
+        this.factor = factor;
+     }
+    */
+
+    }
+
+    public double aplicar(double cont){
+        return switch(this){
+            GENERAL->    cont *1.21;
+            REDUCIDO -> cont *1,1;
+
+    }
+    lo anterior se puede eliminar y en cambio:
+    // return this.factor * const
+    
+    }
+
+```
 
 
 ## 23. Crea un tipo enumerado en Java que se llame `Mes`, con doce posibles instancias y que además proporcione métodos para obtener cuántos días tiene ese mes, el ordinal de ese mes en el año (1-12), empleando atributos privados y constructores del tipo enumerado. Añade además cuatro métodos para devolver si ese mes tiene algunos días de invierno, primavera, verano u otoño, indicando con un booleano el hemisferio (norte o sur, parámetro `enHemisferioNorte`). Es decir: `esDePrimavera(boolean esHemisferioNorte)`, `esDeVerano(boolean esHemisferioNorte)`, `esDeOtoño(boolean esHemisferioNorte)`, `esDeInvierno(boolean esHemisferioNorte)`
