@@ -75,6 +75,42 @@ int main(void) {
 
 Ambos enfoques cumplen el requisito: **la función no informa** (no imprime) y la **notificación al usuario se realiza desde fuera**. La primera alternativa es más explícita y local (no depende de globales), mientras que la segunda replica las prácticas de la librería C y puede integrarse bien con otras funciones que ya usan `errno`. En proyectos mayores, también es común devolver un **código de error** (`int` o `enum`) y pasar el resultado por puntero, o encapsular ambos (resultado y estado) en una **estructura** para mayor claridad.
 
+**CLASE:_____**
+A-Devolver valor "especial"
+```java
+float raiz(float num){
+    if(num<0.0){
+        return -1.0;
+    }
+    return sqtr(num);
+}
+
+main(){
+    float num=  PeorTeclado();
+    float resultado= raiz(num);
+    if(resultado!=-1.0){
+        cout<<"Raiz"<<resultado;>>
+        
+    }else{
+        cout<<"No se puede calcular";
+    }
+
+}
+```
+
+B-Pasar un parámetro por referencia para devolver el error allí
+```java
+float raiz(float num, int * error){
+    if(num<0.0>){
+        *error-01; //error
+        return -1.0;
+    }else{
+        *error =0 //todo OK
+        return sqtr(num);
+    }
+}
+```
+
 
 ## 2. Brevemente ¿Qué es una **"excepción"**? ¿Con qué objetivo las usa un programador cuando implementa funciones o cuando las llama?
 
@@ -88,6 +124,45 @@ Por otro lado, cuando una función es **llamada**, las excepciones permiten que 
 Finalmente, el uso de excepciones favorece una **separación clara entre la lógica normal y la lógica de tratamiento de errores**, lo que facilita la lectura, el mantenimiento y la robustez del programa. En lenguajes como Java, donde las excepciones forman parte esencial del diseño, permiten gestionar errores de manera ordenada y coherente, muy superior a las técnicas tradicionales de C basadas en códigos de retorno o variables globales.
 
 
+**CLASE:_____**
+```mermaid
+graph TD
+a[Excepcion]-->b[situación atípica];
+b[situación atípica]-->c[Errores]
+c[Errores]-->d[Den entrada de usuario ; de validación];
+c[Errores]-->e[de programacion];
+c[Errores]-->f[de entorno   e/s]
+
+```
+Al implementar una función , puedo lanzarlas
+-Al llmar a funciones puedo capturarlas
+
+```java
+class Calculadora{
+    static float raiz(float num){
+        if(num<0.0){
+            throw new IntegralArgumentException("num negativo")
+            //se termina la funcion raiz
+        }
+        return Math.sqtr(num);
+    }
+}
+.
+.
+.
+class App{
+    ...main(...){
+        float num=leerDeTeclado();
+        try{
+            float resultado= Calculadora.raiz(num);
+            sout("Raiz: " + resultado)
+        } catch(IlegalArgumentException  e ){
+            sout("no se pudo calcular");
+        }
+        
+    }
+}
+```
 
 ## 3. Reescribe el mismo ejemplo de raiz, pero en Java, metiendo ese método en una clase `Calculadora` y llama a dicho método desde el método `main`, mostrando cómo se puede controlar desde fuera.
 
@@ -184,6 +259,16 @@ Otro aspecto fundamental es que una excepción puede incluir una **“causa” i
 
 En conjunto, esta información encapsulada —mensaje, traza de pila y posible causa— permite que el manejador tenga acceso inmediato a **todo lo necesario para reaccionar adecuadamente**, ya sea mostrando un mensaje claro, registrando el problema o tomando decisiones sobre cómo continuar. Esta riqueza informativa hace que el tratamiento de errores en Java sea considerablemente más robusto y cómodo que en C.
 
+**CLASE:___**
+
+```mermaid
+graph TD
+a[OBJ Excepcion]-->b[un mensaje];
+a[OBJ Excepcion]-->c[Una traza de pila, vale para depurar]
+a[OBJ Excepcion]-->d[ Opcionalmente una 'causa'];
+
+```
+
 
 ## 8. En Java, sobre el bloque **"try-catch"**, ¿se pueden tener más de un bloque `catch`? ¿cuántos bloques `catch` se ejecutan?
 
@@ -195,6 +280,27 @@ En cuanto a cuántos `catch` se ejecutan, **solo se ejecuta uno**: el **primero 
 Es importante recordar que los bloques `catch` deben ordenarse desde las **excepciones más específicas** hacia las **más generales**. Si se coloca primero un `catch` muy general (como `Exception`), impediría que los `catch` específicos fueran alcanzados nunca, ya que la excepción coincidiría antes con el tipo general. Esta regla de orden responde a la jerarquía de clases y mantiene el control del flujo de errores bien estructurado.
 
 En resumen, un `try` puede tener tantos `catch` como se necesiten, pero solo uno se ejecutará por excepción. Esta capacidad permite manejar de forma precisa distintos tipos de fallos, manteniendo el código más claro y respetando la lógica de la programación orientada a objetos.
+
+**CLASE:___**
+Si, se pude tener más de uno
+
+```java
+try{
+
+}catch(Tipoexcepcion e){  // ej AcessDeniedException-->tipo de IOException
+
+}catch(TipoExcepcion e2){ //IOException
+
+}
+```
+
+```mermaid
+graph TD
+a[CATCH]-->b[solo se ejecuta 1];
+a[CATCH]-->c[se comprueba x orden hasta el 1 que encaje]
+a[CATCH]-->d[Se deben poner del mas expecifico al más general, en ese orden, si no los catch para excepciones especificas no se ejecutarán];
+
+```
 
 
 ## 9. Si las excepciones producen rupturas en el código llamador, ¿cómo podemos garantizar que se ejecuta siempre finalmente un código necesario para cierre de ficheros, liberacion de recursos, antes de que continúe propagándose la excepción? Pon un ejemplo en Java con `finally`, tanto con `catch` como sin él.
@@ -278,6 +384,22 @@ public class AppSinCatch {
 > Nota: en Java moderno, para recursos que implementan `AutoCloseable`, conviene preferir **try-with-resources** (`try (BufferedReader br = ...) { ... }`) porque cierra automáticamente sin necesidad de `finally`. Sin embargo, el objetivo aquí era mostrar explícitamente el papel de `finally` **con y sin `catch`**.
 
 
+
+**CLASE:___**
+
+```java
+try{
+
+}catch(){
+
+}catch(){
+
+}finally{ // Se ejecuta simpre que se entre en el bloque try
+
+}
+```
+
+
 ## 10. En Java, el bloque `finally` puede ir sin `catch`? ¿Se ejecuta siempre tanto si ocurre como si no ocurre una excepción? ¿Y si hay un `return` en medio del `try`?
 
 ### Respuesta
@@ -312,6 +434,11 @@ La salida será:
 
 Este comportamiento demuestra que `finally` es una garantía sólida: **siempre se ejecuta**, haya o no haya excepción, y exista o no un `return` anticipado dentro del `try`.
 
+**CLASE:___**
+Si, puede ir sin catch:
+-Se ejecuta puesto que es finaly
+-Si hubo excepcion, como no tomemos catch, se propaga
+
 
 ## 11. En Java, qué son las excepciones **"controladas"** y las **"no controladas"**? ¿Qué papel juega `RuntimeException`? Pon un ejemplo de excepciones típicas controladas y no controladas que incluso nosotros mismos podríamos usar. Haz dos listas con 3 o 4 ejemplos de situación donde se suele preferir una excepción controlada y donde se suele preferir una excepción no controlada.
 
@@ -338,6 +465,22 @@ A continuación se muestran dos listas de situaciones donde suele preferirse cad
 *   Operaciones con objetos que podrían ser `null`.
 *   Violación de una precondición del método o error lógico del programador.
 
+**CLASE:___**
+```mermaid
+graph TD
+a[Exception]-->b[RuntimeException]
+b[RuntimeException]-->c[IllegalArgumentException]
+b[RuntimeException]-->d[NullPointerException 'NPE']
+b[RuntimeException]-->e[ArrayIndexOutOfBoundsException]
+a[Exception]-->f[IOException]
+f[IOException]-->g[AccesDeniedException]
+a[Exception]-->h[...]
+
+```
+-la RuntimeExceptions son "No controladas"; no estas obligado a poner bloques try catch/throw
+-el resto son "Controladas" poner try catch/throw
+
+
 
 ## 12. ¿Qué es y para qué se usa `throws`? ¿Por qué es alternativa a capturar una excepción controlada?
 
@@ -351,6 +494,18 @@ El uso de `throws` resulta especialmente útil en métodos que trabajan con **re
 
 En resumen, `throws` sirve para **propagar hacia arriba excepciones controladas**, dejando claro qué métodos pueden fallar y delegando la decisión de cómo actuar ante ese fallo. Es una alternativa a capturar la excepción en el mismo método y forma parte de la filosofía de Java para gestionar errores de forma ordenada, explícita y estructurada.
 
+
+**CLASE:___**
+```java
+public String leerFichero(Path p) throws IOException{//Opcion b(throws)
+
+}try{
+    //Opcion A
+    ...=Files.readAllBytes(p);
+}catch(IOException){
+
+}
+```
 
 ## 13. Pon un ejemplo en Java de firma de método que incluya `throws`, de una función que abre un fichero pero que declara que no le interesa menejar la excepción de si el fichero no existe, sino que se propague hacia arriba. Eso sí, acuérdate del `finally`.
 
@@ -394,6 +549,19 @@ public class Ficheros {
 Como variante moderna, puede usarse **try-with-resources** para evitar el `finally` explícito siempre que el recurso implemente `AutoCloseable`. Sin embargo, el requisito de este ejercicio es recordar el `finally`, por lo que se muestra el patrón clásico con cierre manual y `throws` para diferenciar con claridad la **limpieza local** del **manejo de errores en el llamador**.
 
 
+**CLASE:___**
+```java
+public String leerFichero(Path p) throws IOException{//Opcion b(throws)
+
+}try{
+    //Opcion A
+    ... = Files.readAllBytes(p);
+}finally{
+    ...
+}
+```
+
+
 ## 14. ¿Podemos poner en `throws` excepciones no controladas, como `RuntimeException`? ¿Debería el método llamador entonces poner `try-catch` en ese caso? ¿Qué sentido tendría?
 
 ### Respuesta
@@ -402,6 +570,11 @@ Sí, en Java **se puede** declarar en `throws` excepciones **no controladas** (u
 Respecto a si el método llamador “debe” poner `try-catch` en ese caso, la respuesta es **no por obligación**, solo **si tiene una estrategia de recuperación razonable**. Las unchecked suelen representar **errores de programación** o **violaciones de contrato** (precondiciones incumplidas, estados imposibles, `null` indebido, índices fuera de rango). En esos casos, lo habitual es **no capturarlas localmente** y dejar que se **propaguen** hasta un manejador de alto nivel (por ejemplo, el bucle principal de una app, un filtro/handler en un servidor web, o un interceptor que registre y devuelva un error). Capturarlas solo tiene sentido si el llamador **puede corregir el problema** o **debe garantizar invariantes** (p. ej., registrar y continuar aislando el fallo de un subsistema).
 
 ¿Entonces qué sentido tiene declararlas en `throws`? Principalmente, **comunicar el contrato de la API** y guiar al usuario del método: “si incumples esta precondición, se lanzará `XxxRuntimeException`”. También puede ayudar a **herramientas** y a lectores a entender el flujo de errores, sin forzar `try-catch`. En resumen: se pueden poner unchecked en `throws`, pero es **opcional** y con un propósito **informativo**; el llamador **solo** debería capturarlas cuando realmente **pueda y deba** manejar la situación (p. ej., en límites de capa, para registrar, transformar o encapsular la falla), no por imposición del compilador.
+
+**CLASE:___**
+-Por poder podemos, pero el compilador no va a obligar a bloque try.catch.
+-No es habitual
+-A veces se pone por documentación
 
 
 ## 15. ¿Cuándo se recomienda usar excepciones controladas, como `IOException`, y cuándo no controladas como `IllegalArgumentException`? ¿Existen en todos los lenguajes ambas opciones? En los que sólo existe una opción, ¿cuál es la más habitual?
@@ -414,6 +587,11 @@ En cambio, las **excepciones no controladas** como `IllegalArgumentException`, `
 No todos los lenguajes distinguen entre excepciones controladas y no controladas como hace Java. De hecho, **la mayoría de lenguajes modernos solo proporcionan un tipo de excepción no controlada**, como Python, JavaScript, C#, Ruby o Kotlin. En esos lenguajes, las excepciones funcionan como las no controladas de Java: si se lanzan, el método llamador puede capturarlas, pero **no está obligado** a hacerlo y el compilador no impone restricciones. Esta opción es la más habitual porque simplifica el diseño del lenguaje y evita la necesidad de declarar `throws`.
 
 En lenguajes donde solo existe una opción, la tendencia predominante es la de las **excepciones no controladas**, ya que permiten un estilo de programación más natural, sin obligatoriedad de capturar cada posible error. Java es una excepción notable por mantener ambas categorías, pero incluso en Java se debate desde hace años que las excepciones controladas pueden volverse demasiado verbosas cuando se abusa de ellas. En la práctica, resulta recomendable utilizarlas solo para fallos externos y razonablemente recuperables, y reservar las no controladas para los errores lógicos o de contrato.
+
+**CLASE:___**
+-Cundo son para situaciones q no podemos evitar q vuelvan a sudceder
+
+-Cada lenguaje tine su forma de solucionar sus errores, la mayotía suele ir por las no controladas, no usar try catch, deciden q si surgen pete y poner a la segunda la excepción
 
 
 ## 16. ¿Tiene sentido lanzar excepciones dentro del `catch`? ¿Se puede relanzar la misma excepción capturada? ¿Cuándo tendría sentido hacer esto último? Pon ejemplos de ambos casos.
@@ -454,6 +632,38 @@ En este caso, se registra el error (o cualquier otra acción necesaria) y luego 
 
 En resumen, tanto lanzar una nueva excepción dentro del `catch` como relanzar la excepción capturada son técnicas útiles y habituales. La primera se usa para traducir o encapsular el error en un tipo más adecuado para otra capa; la segunda se usa para realizar acciones adicionales antes de permitir que la excepción siga su camino natural por la pila. Ambas técnicas refuerzan la estructura y claridad del código orientado a objetos.
 
+**CLASE:___**
+-Si, tiene sentido en algunos casos
+-Podemos relanzar la misma excepción:
+```java
+try{
+
+}catch(NumberFormatException e){
+    .
+    .
+    .
+    throw e;  //Relanzarla
+
+}
+```
+-Envolver en otra excepcion nueva: (ver 17)
+```java
+try{
+
+}catch(NumberFormatException e){
+    throw new RuntimeException("excepcion de E/S " , e);
+}
+```
+
+-Lanzar otra excepcion nueva
+
+```java
+try{
+
+}catch(NumberFormatException e){
+    throw new AplicacionException("error"); //Sin la e
+}
+```
 
 ## 17. ¿En qué consiste que una excepción sea la **"causa"** de otra excepción? Pon un ejemplo en Java, donde capturemos una excepción de bajo nivel y la encapsulemos en otra personalizada de alto nivel. Cuando una excepción sale por pantalla y tiene una causa, ¿se ve?
 
@@ -501,4 +711,12 @@ Cuando esta excepción se muestra por pantalla, **sí aparece la causa**, porque
         at Ejemplo.cargarDatos(Ejemplo.java:7)
 
 En la traza se ve claramente la excepción de alto nivel (“No se pudieron cargar los datos necesarios”) seguida por la que actuó como causa (“Fallo leyendo el fichero de configuración”). Esta visibilidad facilita enormemente localizar el origen del problema sin perder el contexto del nivel donde se detectó o manejó inicialmente.
+
+**CLASE:___**
+capturo excepcion , la meto en la excep y meto la original como causa primigenia.
+
+---
+Cousa de excepcion:
+    "Excepcion externa"(NetFluxExption)
+    Created by excepcion interna (IOException)
 
