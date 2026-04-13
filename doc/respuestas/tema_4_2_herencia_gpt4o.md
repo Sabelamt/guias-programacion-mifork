@@ -15,7 +15,6 @@ Por favor, escribe en impersonal las respuestas.
 ## 1. En orientación a objetos, ¿qué es la **herencia** y su relación con "A es-un B"?. Explica las dos implicaciones principales: (1) **compatibilidad de tipos** y (2) **herencia de estado y comportamiento**. Pon un ejemplo en Java muy sencillo, donde un `Soldado` tiene un `nombre` (privado) y un método `saludar()` que muestra su nombre. Hay dos subtipos: un `Artillero`, que es capaz de disparar cohetes y un `Zapador` que pone minas, ambos heredan el atributo nombre y la capacidad de saludar. Además, y de forma específica, el artillero tiene un número de cohetes y el zapador un número de minas, accesibles mediante "getters" específicos. Respecto a la compatibilidad de tipos, aprovechémosla: crea un array de `Soldado`, mete varios de distinto tipo (son todos compatibles con `Soldado`). Recórrela y que todos te saluden.
 
 ### Respuesta
-### Respuesta
 
 En orientación a objetos, la **herencia** es un mecanismo mediante el cual una clase nueva se define a partir de otra ya existente, estableciendo una relación del tipo **“A es-un B”**. Esto significa que si una clase `Artillero` hereda de `Soldado`, se puede afirmar que *un artillero es un soldado*. Esta relación no es solo conceptual, sino que tiene consecuencias directas en cómo el lenguaje trata a los objetos en tiempo de compilación y ejecución, y permite modelar jerarquías claras entre tipos relacionados.
 
@@ -83,7 +82,48 @@ public class Main {
     }
 }
 ```
+CLASE:__
+**Composicion:**->"tiene un/tienen varios" vs **Herencia**->"es un"
 
+1.COMPATIBILIDAD DE TIPOS
+ ```java
+Soldado s= new Artillero ("pepe")
+ ```
+2.HERENCIA DE ESTADO Y COMPORTAMIENTO
+    *estado*-> atributos
+    *comportamiento*-> métodos
+
+CLASE:__
+```java
+public class Artillero extends Soldado{
+    private int numCohetes;
+    public Artillero(String nombre, int numCohetes){
+        super(nombre);
+        this.numCohetes=numCohetes;
+    }
+    public int getNumCohetes(){
+        return this.numCohetes;
+    }
+}
+```
+
+```java
+public class PruebaHHerencia{
+    private static void pasarRevista(Soldado[] soldados){
+        for(Soldado soldado: soldados){
+            soldado.saludar;
+        }
+    }
+    public static void main (String [] args){
+        Soldado[]soldadosVarios =new Soldado[3];
+        soldadosVarios[0] = new Soldado("Carlos",5);
+        soldadosVarios[1] = new Artillero("Ana",3);
+        soldadosVarios[2] = new Zapador("Luis", 7);
+
+        pasarRevista(soldadosVarios);
+    }
+}
+```
 
 
 ## 2. Al crear los soldados concretos, ¿cuántos constructores se ejecutan y en qué orden? ¿Qué significa `super` dentro de un constructor? Si la clase base no tiene visible el constructor sin parámetros, ¿debo llamar a `super` siempre? 
@@ -96,6 +136,7 @@ Al crear un objeto de una clase concreta que hereda de otra (por ejemplo, un `Ar
 La palabra clave `super` dentro de un constructor se utiliza para **invocar explícitamente un constructor de la clase base**. Permite pasar parámetros necesarios para inicializar atributos heredados que pertenecen a la superclase. Conceptualmente, `super(...)` indica que parte de la responsabilidad de la construcción del objeto se delega en la clase padre. En Java, esta llamada debe ser siempre la **primera instrucción del constructor**, ya que la inicialización de la clase base no puede depender de una inicialización posterior de la subclase.
 
 Si la clase base **no tiene visible un constructor sin parámetros**, entonces **es obligatorio llamar explícitamente a `super(...)`** con los argumentos adecuados. En caso contrario, el código no compilará, porque Java inserta implícitamente una llamada a `super()` solo cuando existe un constructor vacío accesible. Esto obliga a que el diseñador de la subclase sea consciente de cómo se inicializa la clase base y refuerza la idea de que una subclase no puede ignorar el proceso de construcción de su superclase.
+
 
 
 ## 3. Respecto a los objetos de subclases en memoria, los atributos privados de la superclase, ¿forman parte de una instancia de la subclase en memoria? En caso afirmativo ¿implica que se puedan usar desde el código de la subclase? Explícalo con el ejemplo de `Soldado` y alguna de sus subclases.
