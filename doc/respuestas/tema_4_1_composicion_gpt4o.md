@@ -708,7 +708,12 @@ Saída esperada:
 *   **Entradas de menús con submenús** (cada elemento pode conter máis elementos iguais).
 *   **Comentarios con respostas anidadas** (cada comentario contén outros comentarios).
 
-***
+Clase:__
+```mermaid
+graph TD
+ a[composicion]-->b[recursivas o reflexivas]
+ a[composicion]-->c[bidireccionales]
+```
 
 
 
@@ -723,5 +728,6 @@ No exemplo de `Profesor` e `Departamento`, implementar unha relación bidireccio
 Para implementalo correctamente, sería necesario modificar o constructor de `Profesor` para recibir inicialmente o `Departamento`, ou ben proporcionar un método interno que permita ao departamento asignarse como contedor do profesor no momento en que se engade. En ambos casos, o cambio non debería quedar exposto ao exterior para evitar romper a encapsulación. O punto crítico sería garantir que ningún profesor quede nun estado no que crea pertencer a un departamento do que xa non forma parte, e viceversa. A relación bidireccional, aínda que útil en moitos modelos, require manter esta coherencia interna de maneira estrita.
 
 ***
-
-
+Clase:__
+-Las **bidireccionales** exigen programar cuidadosamente para mantener la consistencia.
+*ej.* Si añado un profesor al departamento, debo actualizar la referencia al Departamento desde Profesor.
