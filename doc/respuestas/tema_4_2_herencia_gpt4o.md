@@ -322,11 +322,15 @@ Esta herencia implícita tiene consecuencias prácticas importantes. Métodos co
 
 En el ejemplo de `Soldado`, aunque no se declare explícitamente `extends Object`, la clase hereda de ella de forma automática. Esto implica que un `Soldado`, un `Artillero` o un `Zapador` pueden utilizar los métodos definidos en `Object`, y que todos ellos pueden almacenarse en una referencia de tipo `Object` si fuera necesario. De este modo, Java garantiza una base común para todos los objetos del sistema sin que el programador tenga que intervenir explícitamente.
 
+CLASE:__
+C++ no tiene una base multiple, java si la tiene: Objeto
+List String>
+
 
 ## 8. ¿Qué es la **"herencia múltiple"**? ¿Existe en Java herencia múltiple?
 
 ### Respuesta
-### Respuesta
+
 
 La **herencia múltiple** es un mecanismo de la orientación a objetos que permite que una clase **herede directamente de más de una clase base**, combinando así el estado y el comportamiento de varias superclases. Conceptualmente, esto implicaría que una clase puede cumplir varias relaciones del tipo *“A es-un B”* al mismo tiempo. Aunque esta idea puede parecer potente, también introduce problemas de diseño y ambigüedad, especialmente cuando distintas clases base definen métodos o atributos con el mismo nombre.
 
@@ -335,6 +339,9 @@ No todos los lenguajes orientados a objetos soportan herencia múltiple de la mi
 En **Java no existe herencia múltiple de clases**. Una clase solo puede extender directamente de **una única clase base** usando la palabra clave `extends`. Esta decisión de diseño evita ambigüedades y simplifica el modelo de herencia, haciendo el comportamiento del programa más predecible. Sin embargo, Java sí permite una forma controlada de herencia múltiple a través de **interfaces**, que permiten que una clase implemente múltiples contratos de comportamiento sin heredar estado.
 
 De este modo, Java separa claramente la **herencia de implementación** (mediante clases, limitada a una sola) de la **herencia de comportamiento abstracto** (mediante interfaces, potencialmente múltiple). Esta solución proporciona flexibilidad para el diseño, a la vez que mantiene la claridad y la seguridad del modelo de herencia, evitando los problemas clásicos asociados a la herencia múltiple de clases.
+
+CLASE:__
+**HERENCIA MÚLTIPLE:** Heredar de ´de una clase. En java no está soportada porque lo decide así para evitar problemas como herencia en distancia.
 
 
 ## 9. Las excepciones en los lenguajes orientados a objetos son objetos. Por tanto, se pueden crear excepciones personalizadas. Pon un ejemplo en Java de una excepción personalizada (`UsuarioNoEncontradoException`), que sea *no controlada* y que además este compuesto con un `Usuario`, para saber qué `Usuario` dio el problema. Permite además que se pueda incluir la causa, es decir, sobrecarga el constructor para tener una versión que permita añadir la causa subyacente. 
@@ -427,6 +434,22 @@ Además, el uso de miembros `protected` suele ser un síntoma de este problema. 
 En contraste, la composición mantiene mejor la encapsulación porque los objetos internos se utilizan a través de interfaces bien definidas, sin exponer su implementación. Así, cuando se afirma que la herencia rompe la encapsulación, no se indica que sea incorrecta, sino que **debe usarse con cuidado**, reservándola para relaciones claras y estables, y evitando emplearla como simple mecanismo de reutilización de código.
 
 
+CLASE:__
+```mermaid
+graph TD
+v[-No usar herencia solo por reutilizar código.]-->x[-Debe usarse usando se necesita la compatibilidad de tipos.]
+```
+
+
+
+```mermaid
+graph TD
+A[-Usar herrencia implica un fuerte acoplamiento desdde la clase derivada hacia la clase base]-->b[la clase derivada depende mucho de la base]
+A[-Usar herrencia implica un fuerte acoplamiento desdde la clase derivada hacia la clase base]-->c[Cambiosinternos enla clase base podrian llegar a a afectar a las derivadas]
+```
+
+
+
 ## 13. Pongamos un ejemplo de dos alternativas para lo mismo. Tenemos un `Estudiante` y un `Trabajador`, ambos tienen datos en común: el DNI y el nombre. Modelemos esto de dos formas: uno por herencia, con una superclase `Persona`, y otro con composición, con una clase `DatosPersonales`. Se debe recibir una instancia de `DatosPersonales` en el constructor de la clase `Estudiante` y `Trabajador`.
 
 ### Respuesta
@@ -501,3 +524,4 @@ public class Trabajador {
 ```
 
 Ambos enfoques permiten resolver el mismo problema, pero responden a criterios de diseño distintos. La herencia enfatiza la relación conceptual y la jerarquía, mientras que la composición prioriza la flexibilidad y el desacoplamiento. Elegir uno u otro depende de si se desea modelar un *“es‑una”* claro o simplemente reutilizar datos comunes sin imponer una estructura jerárquica rígida.
+
