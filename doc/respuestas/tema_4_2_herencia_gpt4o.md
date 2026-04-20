@@ -93,7 +93,7 @@ Soldado s= new Artillero ("pepe")
     *estado*-> atributos
     *comportamiento*-> métodos
 
-CLASE:__
+
 ```java
 public class Artillero extends Soldado{
     private int numCohetes;
@@ -137,11 +137,13 @@ La palabra clave `super` dentro de un constructor se utiliza para **invocar expl
 
 Si la clase base **no tiene visible un constructor sin parámetros**, entonces **es obligatorio llamar explícitamente a `super(...)`** con los argumentos adecuados. En caso contrario, el código no compilará, porque Java inserta implícitamente una llamada a `super()` solo cuando existe un constructor vacío accesible. Esto obliga a que el diseñador de la subclase sea consciente de cómo se inicializa la clase base y refuerza la idea de que una subclase no puede ignorar el proceso de construcción de su superclase.
 
+CLASE:__
+
+
 
 
 ## 3. Respecto a los objetos de subclases en memoria, los atributos privados de la superclase, ¿forman parte de una instancia de la subclase en memoria? En caso afirmativo ¿implica que se puedan usar desde el código de la subclase? Explícalo con el ejemplo de `Soldado` y alguna de sus subclases.
 
-### Respuesta
 ### Respuesta
 
 Los **atributos privados de una superclase sí forman parte de la instancia en memoria de una subclase**. Cuando se crea un objeto de una subclase, ese objeto contiene **toda la estructura del objeto de la clase base**, junto con los atributos definidos en la propia subclase. En otras palabras, un `Artillero` no es un objeto distinto que “apunta” a un `Soldado`, sino un único objeto que incluye internamente la parte correspondiente a `Soldado`, con todos sus atributos, incluidos los privados.
@@ -181,10 +183,13 @@ public class Artillero extends Soldado {
 
 Este comportamiento muestra que la herencia implica **presencia en memoria**, pero no **visibilidad en el código**, y que ambas ideas deben distinguirse claramente al trabajar con jerarquías de clases en Java.
 
-
+CLASE:__
+si
+si
+forman parte en memoria
+el nobre no es accesible;; es privado
 ## 4. ¿Qué implica en términos de **extensibilidad** de código el hecho de que sean compatibles a nivel de tipos? Ilustra esto añadiendo un nuevo tipo de `Soldado` y demostrando que el código para pedir el saludo a todos los soldados no se modifica.
 
-### Respuesta
 ### Respuesta
 
 La **compatibilidad de tipos** entre una superclase y sus subclases tiene una implicación directa en la **extensibilidad del código**. Gracias a esta propiedad, el código que trabaja con objetos del tipo base no necesita modificarse cuando se añaden nuevas subclases. Mientras el nuevo tipo cumpla la relación “es-un” con la superclase (`es un Soldado`), puede integrarse automáticamente en los mismos mecanismos ya existentes. Esto permite extender el sistema añadiendo funcionalidad sin romper ni reescribir código previo, uno de los objetivos principales del diseño orientado a objetos.
@@ -401,7 +406,6 @@ En resumen, la herencia debe emplearse cuando existe una relación clara y estab
 ## 11. Herencia vs. Composición. Se dice que se debe *"favorecer la composición frente a la herencia"*, ¿por qué?
 
 ### Respuesta
-### Respuesta
 
 Se recomienda **favorecer la composición frente a la herencia** porque la composición proporciona **mayor flexibilidad y menor acoplamiento** entre las clases. Cuando se usa herencia, la clase derivada queda fuertemente ligada a la clase base, tanto a su interfaz como a su implementación interna. Esto implica que cualquier cambio en la superclase puede afectar directamente a todas sus subclases, incluso en aspectos que estas no utilizan realmente, lo que dificulta la evolución y el mantenimiento del sistema a medio y largo plazo.
 
@@ -412,7 +416,6 @@ Desde el punto de vista del diseño, favorecer la composición conduce a sistema
 
 ## 12. Herencia vs. Composición. Se dice que la *"herencia rompe la encapsulación"*, ¿a qué se refiere esto?
 
-### Respuesta
 ### Respuesta
 
 Cuando se dice que la **herencia rompe la encapsulación**, se hace referencia a que una subclase queda **demasiado expuesta a los detalles internos de la clase base**. Aunque la encapsulación pretende ocultar la implementación interna de una clase y exponer solo una interfaz bien definida, la herencia permite que las subclases dependan directamente de cómo está implementada la superclase, no solo de lo que esta ofrece públicamente. Esta dependencia va más allá de usar un objeto: la subclase se construye *sobre* la clase base.
